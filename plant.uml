@@ -1,0 +1,55 @@
+@startuml
+
+class UserInterface {
+    {abstract} display_contacts(contacts)
+    {abstract} display_commands_info(commands_info)
+}
+
+class ConsoleInterface {
+    display_contacts(contacts)
+    display_commands_info(commands_info)
+}
+
+class Field {
+    - value
+}
+
+class Name {
+}
+
+class Phone {
+}
+
+class Birthday {
+}
+
+class Record {
+    - name: Name
+    - phones: list
+    - birthday: Birthday
+    + __init__(name, birthday=None)
+    + add_phone(phone)
+    + delete_phone(phone)
+    + edit_phone(old_phone, new_phone)
+    + find_phone(phone)
+    + add_birthday(birthday)
+    + __str__()
+}
+
+class AddressBook {
+    - data: dict
+    + add_record(record)
+    + delete(name)
+    + find(name)
+    + get_upcoming_birthdays()
+}
+
+UserInterface <|-- ConsoleInterface
+Field <|-- Name
+Field <|-- Phone
+Field <|-- Birthday
+Record --|> Name
+Record --|> Phone
+Record --|> Birthday
+AddressBook --|> UserDict
+@enduml
